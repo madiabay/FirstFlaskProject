@@ -7,7 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Lada Sedan</h1>
-    <img src="{{ url_for('static', filename='flask-tutorial.png') }}" width="1000", height="1000">
+    <!-- <h1>Lada Sedan</h1> -->
+    <!-- <img src="{{ url_for('static', filename='flask-tutorial.png') }}" width="1000", height="1000"> -->
+    <ul>
+        {% if 'Green' in colors %}
+            {% for color in colors %}
+                <li>{{ color }}</li>
+            {% endfor %}
+        {% else %}
+            <li>Green color is not in the list</li>
+        {% endif %}
+    </ul>
 </body>
 </html>

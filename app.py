@@ -1,11 +1,13 @@
+from turtle import color
 from flask import Flask, render_template, url_for, redirect
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # return render_template('index.html')
-    return redirect(url_for('about'))
+    colors = ['Red', 'Yellow', 'Green']
+    return render_template('index.html', colors=colors)
+    # return redirect(url_for('about'))
 
 @app.route('/about/')
 def about():
