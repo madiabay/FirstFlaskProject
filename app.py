@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, request
 from flask_bootstrap import Bootstrap
 from flask_mysqldb import MySQL
 import yaml
@@ -33,6 +33,14 @@ def about():
 @app.route('/css/')
 def css():
     return render_template('css.html')
+
+# Для изучения POST и GET запроса
+@app.route('/register/', methods=['get', 'post'])
+def register():
+    if request.method == 'POST':
+        return request.form['password']
+        # return 'Вы успешно зарегистрировались'
+    return render_template('register.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
