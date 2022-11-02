@@ -17,12 +17,13 @@ mysql = MySQL(app)
 @app.route('/')
 def index():
     cursor = mysql.connection.cursor()
-    # cursor.execute("INSERT INTO user VALUES(%s)", (['John']))
-    # cursor.connection.commit()
-    result_value = cursor.execute("SELECT * FROM user;")
-    if result_value > 0:
-        users = cursor.fetchall()
-        print(users)
+    if cursor.execute("INSERT INTO user(user_name) VALUES('Meirbek');"):
+        cursor.connection.commit()
+        return 'Success', 201
+    # result_value = cursor.execute("SELECT * FROM user;")
+    # if result_value > 0:
+    #     users = cursor.fetchall()
+    #     return str(users)
     return render_template('index.html')
     # return redirect(url_for('about'))
 
@@ -41,6 +42,11 @@ def register():
         return request.form['password']
         # return 'Вы успешно зарегистрировались'
     return render_template('register.html')
+
+# Custom errorhandler (ручная ошибка)
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
